@@ -32,6 +32,7 @@ hmin = 0.2;     % Minimal water depth for computation
 %       Computation of wave characteristics
 %------------------------------------------------
 
+
 waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin);
 
 
@@ -40,9 +41,65 @@ waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin);
 %------------------------------------
 
 figure;
-subplot(2,1,1); plot(waves.x,waves.Hrms)
+subplot(4,1,1); plot(waves.x,waves.Hrms)
+title('Zeta =',num2str(Zeta(1)))
+
 ylabel('Hrms (m)')
-subplot(2,1,2); plot(waves.x,waves.z,'k')
+subplot(4,1,2); plot(waves.x,waves.z,'k')
 hold on; plot(waves.x,Zeta*ones(size(x)),'-.')
 xlabel('x (m)')
 ylabel('zb (m)')
+
+%Adding the Dbr and Dissipation of the roller plots
+subplot(4,1,3)
+plot(waves.x,waves.Dbr)
+xlabel('x (m)')
+ylabel('Dbr ()') %SEARCH FOR THE UNITS
+%AND ADJUST Y AXIS!!!!
+
+subplot(4,1,4)
+
+plot(waves.x,waves.Dr)
+xlabel('x (m)')
+ylabel('Dr ()') %SEARCH FOR THE UNITS (maybe W/m^2) or J/s/m^2
+%AND ADJUST Y AXIS!!!!
+
+Zeta2 = [-1, 1]
+
+for i=1:2
+    %------------------------------------------------
+    %       Computation of wave characteristics
+    waves = BJmodel(Hrms0,T0,Zeta2(i),theta0,profile,hmin);
+    %------------------------------------
+    %           Visualisation 
+    figure;
+    subplot(4,1,1); plot(waves.x,waves.Hrms)
+    title('Zeta =',num2str(Zeta2(i)))
+    ylabel('Hrms (m)')
+    subplot(4,1,2); plot(waves.x,waves.z,'k')
+    hold on; plot(waves.x,Zeta*ones(size(x)),'-.')
+    xlabel('x (m)')
+    ylabel('zb (m)')
+    
+    %Adding the Dbr and Dissipation of the roller plots
+    subplot(4,1,3)
+    plot(waves.x,waves.Dbr)
+    xlabel('x (m)')
+    ylabel('Dbr ()') %SEARCH FOR THE UNITS
+    %AND ADJUST Y AXIS!!!!
+    
+    subplot(4,1,4)
+    
+    plot(waves.x,waves.Dr)
+    xlabel('x (m)')
+    ylabel('Dr ()') %SEARCH FOR THE UNITS
+    %AND ADJUST Y AXIS!!!!
+
+
+end
+
+
+
+
+
+

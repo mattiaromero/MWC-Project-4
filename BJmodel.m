@@ -92,12 +92,12 @@ Hrms(1)  = Hrms0;                     % Root mean square height
 eta(1)   = 0;                         % Set up
 ht(1)    = -z(1) + eta(1) + Zeta;     % Total water depth (includes set-up)
 % ----------------- TO BE FILLED IN ---------------
-%E(1)     = ???                       % Wave energy
-%k(1)     = ???                       % Wave number
-%c(1)     = ???                       % Phase celerity
-%n(1)     = ???                       % ratio group velocity/phase celerity (used in the computation of GROUPVELOCITY and RADIATIONSTRESS)
-%cg(1)    = ???                       % Group celerity
-%theta(1) = ???                       % Wave direction in RAD
+E(1)     = 1/8*rho*g*Hrms(1).^2;                       % Wave energy
+k(1)     = k_fun(T0,ht(1));                       % Wave number
+c(1)     = phase_fun(T0,ht(1));                       % Phase celerity
+n(1)     = n_fun(k(1),ht(1));                       % ratio group velocity/phase celerity (used in the computation of GROUPVELOCITY and RADIATIONSTRESS)
+cg(1)    = group_fun(T0,ht(1));                       % Group celerity
+theta(1) = theta0;                       % Wave direction in RAD
 % ------------------------------------------------
 Er(1)    = 0;                         % Roller energy. Needed for computation of Sxx(1), and therefore initialized at 0.
 Sxx(1)   = radiationStressXX(n(1),theta(1),E(1),Er(1)); % Radiation stress
@@ -149,17 +149,17 @@ for gid = 1:lastWet       % loop on the cross-shore positions
         dx = x(gid+1) - x(gid);                                 % cross-shore gridsize
         ht(gid+1) = -z(gid+1) + eta(gid+1) + Zeta;              % total water level
         % ---------------- TO BE FILLED IN ---------------
-        % k(gid+1) = ???                                        % wave number
-        % c(gid+1) = ???                                        % wave celerity
-        % n(gid+1) = ???                                        % group velocity/phase celerity
-        % cg(gid+1) = ???                                       % group velocity
-        % theta(gid+1) = ???                                    % wave direction
+        k(gid+1) = k_fun(T0,ht(gid+1));                                        % wave number
+        c(gid+1) = phase_fun(T0,ht(gid+1));                                        % wave celerity
+        n(gid+1) = n_fun(k(gid+1),ht(gid+1));                                        % group velocity/phase celerity
+        cg(gid+1) = group_fun(T0,ht(gid+1));                                        % group velocity
+        theta(gid+1) = asin(sin(theta(gid)*c(gid+1)/c(gid)))   %We use snell's law                             % wave direction
         %
         % %energy balance
-        % E(gid+1) = ???                                        % wave energy
+        E(gid+1) = (E(gid)*cg(gid)*cos(theta(gid)))/(cg(gid+1)*cos(theta(gid+1))) - (Dbr(gid))*dx/(cg(gid+1)*cos(theta(gid+1)));                                       % wave energy
         %
         % %compute new Hrms from wave energy
-        % Hrms(gid+1) = ???                                     % root mean square wave height
+        Hrms(gid+1) = sqrt(E(gid+1)*8/(rho*g));  %We can calculate Hrms from energy, formula (5.1) matlab pdf % root mean square wave height
         % ---------------- END PART TO BE FILLED ---------
         
         % roller dissipation
