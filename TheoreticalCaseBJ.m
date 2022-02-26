@@ -41,35 +41,36 @@ waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin);
 %------------------------------------
 
 figure;
-subplot(4,1,1); plot(waves.x,waves.Hrms)
-title('Zeta =',num2str(Zeta(1)))
+subplot(4,1,1); plot(waves.x,waves.Hrms);
+title('Zeta =',num2str(Zeta(1)));
 
-ylabel('Hrms (m)')
-subplot(4,1,2); plot(waves.x,waves.z,'k')
-hold on; plot(waves.x,Zeta*ones(size(x)),'-.')
-ylim([0.5 1.5])
-xlabel('x (m)')
-ylabel('zb (m)')
+ylabel('Hrms (m)');
+subplot(4,1,2); plot(waves.x,waves.z,'k');
+hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
+ylim([0.5 1.5]);
+xlabel('x (m)');
+ylabel('zb (m)');
 
 %Adding the Dbr and Dissipation of the roller plots
-subplot(4,1,3)
-plot(waves.x,waves.Dbr)
-xlabel('x (m)')
-ylabel('Dbr (W/m^2)') 
-ylim([0 250])
-xlim([0 420])
+subplot(4,1,3);
+plot(waves.x,waves.Dbr);
+xlabel('x (m)');
+ylabel('Dbr (W/m^2)') ;
+ylim([0 250]);
+xlim([0 420]);
 
 
-subplot(4,1,4)
+subplot(4,1,4);
 
-plot(waves.x,waves.Dr)
-xlabel('x (m)')
-ylabel('Dr ((W/m^2))') 
-ylim([0 300])
-xlim([0 420])
+plot(waves.x,waves.Dr);
+xlabel('x (m)');
+ylabel('Dr ((W/m^2))') ;
+ylim([0 300]);
+xlim([0 420]);
 
+%% varying Zeta
 
-Zeta2 = [-1, 1]
+Zeta2 = [-1, 1];
 
 for i=1:2
     %------------------------------------------------
@@ -78,38 +79,39 @@ for i=1:2
     %------------------------------------
     %           Visualisation 
     figure;
-    subplot(4,1,1); plot(waves.x,waves.Hrms)
-    title('Zeta =',num2str(Zeta2(i)))
-    ylabel('Hrms (m)')
-    ylim([0.5 1.5])
-    subplot(4,1,2); plot(waves.x,waves.z,'k')
-    hold on; plot(waves.x,Zeta*ones(size(x)),'-.')
-    xlabel('x (m)')
-    ylabel('zb (m)')
+    subplot(4,1,1); plot(waves.x,waves.Hrms);
+    title('Zeta =',num2str(Zeta2(i)));
+    ylabel('Hrms (m)');
+    ylim([0.5 1.5]);
+    subplot(4,1,2); plot(waves.x,waves.z,'k');
+    hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
+    xlabel('x (m)');
+    ylabel('zb (m)');
     
     %Adding the Dbr and Dissipation of the roller plots
-    subplot(4,1,3)
-    plot(waves.x,waves.Dbr)
-    xlabel('x (m)')
-    ylabel('Dbr ((W/m^2))') 
-    xlim([0 420])
-    ylim([0 250])
+    subplot(4,1,3);
+    plot(waves.x,waves.Dbr);
+    xlabel('x (m)');
+    ylabel('Dbr ((W/m^2))') ;
+    xlim([0 420]);
+    ylim([0 250]);
     
     
-    subplot(4,1,4)
+    subplot(4,1,4);
     
-    plot(waves.x,waves.Dr)
-    xlabel('x (m)')
-    ylabel('Dr ((W/m^2))') 
-    ylim([0 300])
-    xlim([0 420])
+    plot(waves.x,waves.Dr);
+    xlabel('x (m)');
+    ylabel('Dr ((W/m^2))') ;
+    ylim([0 300]);
+    xlim([0 420]);
     
 
 
 end
 
+%% varying Hrms0
 
-Hrms02 = [0.5, 2]
+Hrms02 = [0.5, 2];
 
 for i=1:2
     %------------------------------------------------
@@ -118,35 +120,75 @@ for i=1:2
     %------------------------------------
     %           Visualisation 
     figure;
-    subplot(4,1,1); plot(waves.x,waves.Hrms)
-    title('Hrms0 =',num2str(Hrms02(i)))
-    ylabel('Hrms (m)')
-    ylim([0.5 2.5])
-    subplot(4,1,2); plot(waves.x,waves.z,'k')
-    hold on; plot(waves.x,Zeta*ones(size(x)),'-.')
-    xlabel('x (m)')
-    ylabel('zb (m)')
+    subplot(4,1,1); plot(waves.x,waves.Hrms);
+    title('Hrms0 =',num2str(Hrms02(i)));
+    ylabel('Hrms (m)');
+    ylim([0.5 2.5]);
+    subplot(4,1,2); plot(waves.x,waves.z,'k');
+    hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
+    xlabel('x (m)');
+    ylabel('zb (m)');
     
     %Adding the Dbr and Dissipation of the roller plots
-    subplot(4,1,3)
-    plot(waves.x,waves.Dbr)
-    xlabel('x (m)')
-    ylabel('Dbr ((W/m^2))') 
-    xlim([0 400])
-    ylim([0 500])
+    subplot(4,1,3);
+    plot(waves.x,waves.Dbr);
+    xlabel('x (m)');
+    ylabel('Dbr ((W/m^2))') ;
+    xlim([0 400]);
+    ylim([0 500]);
     
     
-    subplot(4,1,4)
+    subplot(4,1,4);
     
-    plot(waves.x,waves.Dr)
-    xlabel('x (m)')
-    ylabel('Dr ((W/m^2))') 
-    ylim([0 600])
-    xlim([0 400])
+    plot(waves.x,waves.Dr);
+    xlabel('x (m)');
+    ylabel('Dr ((W/m^2))') ;
+    ylim([0 600]);
+    xlim([0 400]);
     
 
 
 end
 
 
+%% varying theta
 
+hmin=0.5; % I think it should be adjusted, because otherwise we run out of energy for the case with 22.5* (see error)
+theta02 = [22.5, 45];
+
+for i=1:2
+    %------------------------------------------------
+    %       Computation of wave characteristics
+    waves = BJmodel(Hrms0,T0,Zeta,theta02(i),profile,hmin);
+    %------------------------------------
+    %           Visualisation 
+    figure;
+    subplot(4,1,1); plot(waves.x,waves.Hrms);
+    title('theta0 =',num2str(theta02(i)));
+    ylabel('Hrms (m)');
+    ylim([0.5 2.5]);
+    subplot(4,1,2); plot(waves.x,waves.z,'k');
+    hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
+    xlabel('x (m)');
+    ylabel('zb (m)');
+    
+    %Adding the Dbr and Dissipation of the roller plots
+    subplot(4,1,3);
+    plot(waves.x,waves.Dbr);
+    xlabel('x (m)');
+    ylabel('Dbr ((W/m^2))'); 
+    xlim([0 400]);
+    ylim([0 500]);
+    
+    
+    subplot(4,1,4);
+    
+    plot(waves.x,waves.Dr);
+    xlabel('x (m)');
+    ylabel('Dr ((W/m^2))') ;
+    ylim([0 600]);
+    xlim([0 400]);
+    
+
+
+end
