@@ -153,7 +153,7 @@ end
 
 %% varying theta
 
-hmin=0.5; % I think it should be adjusted, because otherwise we run out of energy for the case with 22.5* (see error)
+%hmin=0.5; I think it should be adjusted, because otherwise we run out of energy for the case with 22.5* (see error)
 theta02 = [22.5, 45];
 
 for i=1:2
