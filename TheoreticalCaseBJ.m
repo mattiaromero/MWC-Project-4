@@ -47,7 +47,6 @@ title('Zeta =',num2str(Zeta(1)));
 ylabel('Hrms (m)');
 subplot(4,1,2); plot(waves.x,waves.z,'k');
 hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
-ylim([0.5 1.5]);
 xlabel('x (m)');
 ylabel('zb (m)');
 
@@ -153,7 +152,7 @@ end
 
 %% varying theta
 
-%hmin=0.5; I think it should be adjusted, because otherwise we run out of energy for the case with 22.5* (see error)
+
 theta02 = [22.5, 45];
 
 for i=1:2
@@ -171,14 +170,15 @@ for i=1:2
     hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
     xlabel('x (m)');
     ylabel('zb (m)');
-    
+  
+
     %Adding the Dbr and Dissipation of the roller plots
     subplot(4,1,3);
     plot(waves.x,waves.Dbr);
     xlabel('x (m)');
     ylabel('Dbr ((W/m^2))'); 
     xlim([0 400]);
-    ylim([0 500]);
+    ylim([0 500]); %set ylim
     
     
     subplot(4,1,4);
@@ -186,9 +186,8 @@ for i=1:2
     plot(waves.x,waves.Dr);
     xlabel('x (m)');
     ylabel('Dr ((W/m^2))') ;
-    ylim([0 600]);
-    xlim([0 400]);
-    
+    ylim([0 600]);%set ylim
+    xlim([0 400]); 
 
 
 end
