@@ -91,7 +91,11 @@ xlabel('x (m)');
 xlim([4400 5000]); 
 
 
+%% interpolation
 
+for i=1:3
+    interpolation(:,i)=interp1(profile(:,1),waves(i).Hrms, position)
+end
 
 
 

@@ -12,6 +12,7 @@ clear all;
 close all;
 
 prof=load('prof1018.txt');
+MeanWaterDepth=load('MeanWaterDepth.txt');
 
 % Definition of cross-shore coordinates (m)
 x = prof(:,1);  
@@ -45,41 +46,56 @@ end
 
 %loading statistics from chapter 2
 data=load('StatisticsEgmond.mat','Hm_tot','Hrms_tot','H13_tot');
+position=[4478 4765 4790 4814 4835];
+%save('StatisticsEgmond_3','position','Hm_tot','Hrms_tot','H13_tot');
+
 %------------------------------------
 %           Visualisation 
 %------------------------------------
 
 figure;
 subplot(4,1,1); %Low
-
-hold on;
 plot(waves(1).x,waves(1).Hrms);
-plot(waves(2).x,waves(2).Hrms);
+hold on;
+scatter(position,data.Hrms_tot(:,1),'o');
+legend('Model','Observations');
 ylabel('Hrms (m)');
-subplot(4,1,2); plot(waves.x,waves.z,'k');
-hold on;plot(waves.x,Zeta*ones(size(x)),'-.');
+xlim([4400 5000]); 
+
+subplot(4,1,2); 
+plot(waves(2).x,waves(2).Hrms);
+hold on;
+scatter(position,data.Hrms_tot(:,2),'o');
+legend('Model','Observations');
+ylabel('Hrms (m)');
+xlim([4400 5000]); 
+
+subplot(4,1,3); 
+plot(waves(3).x,waves(3).Hrms);
+hold on;
+scatter(position,data.Hrms_tot(:,3),'o');
+legend('Model','Observations');
+ylabel('Hrms (m)');
+xlim([4400 5000]);  
+
+subplot(4,1,4); 
+plot(profile(:,1),profile(:,2));
+hold on; 
+scatter(position,MeanWaterDepth(:,1),'o');
+scatter(position,MeanWaterDepth(:,2),'o');
+scatter(position,MeanWaterDepth(:,3),'o');
+legend('Bedform','Low tide','Mid tide','High tide');
+hold on; 
+ylabel('Bedform (m)');
 xlabel('x (m)');
-ylabel('zb (m)');
-
-%Adding the Dbr and Dissipation of the roller plots
-subplot(4,1,3);
-plot(waves(1).x,waves(1).Dbr);
-plot(waves(2).x,waves(2).Dbr);
-plot(waves(3).x,waves(3).Dbr);
-xlabel('x (m)');
-ylabel('Dbr (W/m^2)') ;
+xlim([4400 5000]); 
 
 
+%% interpolation
 
-subplot(4,1,4);
-
-plot(waves(1).x,waves(1).Dr);
-plot(waves(2).x,waves(2).Dr);
-plot(waves(3).x,waves(3).Dr);
-xlabel('x (m)');
-ylabel('Dr ((W/m^2))') ;
-
-
+for i=1:3
+    interpolation(i)=interp1(profile(:,1),waves(i).Hrms, position)
+end
 
 
 
