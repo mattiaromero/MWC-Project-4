@@ -1,3 +1,6 @@
+%This function computes the root mean square error between two vectors of
+%same length. First input vector contains modelled values and the second one
+%the observed values. 
 function [erms]=root_mean_square_error(model,observations)
     n=length(observations);
     erms=0;
