@@ -97,5 +97,14 @@ for i=1:3
     interpolation(:,i)=interp1(profile(:,1),waves(i).Hrms, position);
 end
 
+% difference between modelled and observed (not specifically asked in the
+% exercise, but I added it here)
+difference= interpolation-data.Hrms_tot;
 
+%% root mean square error
+%  IDK IF MY FUNCTION IS CORRECT- PLEASE DOUBLE CHECK IT!
+erms=zeros(1,3);
+for i=1:3
+    erms(i)=root_mean_square_error(interpolation(:,i),data.Hrms_tot(:,i));
+end 
 
