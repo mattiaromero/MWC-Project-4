@@ -62,9 +62,7 @@ subplot(4,1,1);
 plot(waves(1).x,waves(1).Hrms);
 hold on;
 scatter(position,data.Hrms_tot(:,1),'o');
-legend('Model','Observations');
-title('Cross-shore evolution of wave height(Hrms) for Egmond during low tide');
-ylabel('Height (m)','FontWeight','bold');
+legend('Model','Observations');ylabel('Height (m)','FontWeight','bold');
 ylim([0 1.7]);
 xlim([4400 5000]); 
 
@@ -74,7 +72,6 @@ plot(waves(2).x,waves(2).Hrms);
 hold on;
 scatter(position,data.Hrms_tot(:,2),'o');
 legend('Model','Observations');
-title('Cross-shore evolution of wave height(Hrms) for Egmond during mid tide');
 ylabel('Height (m)','FontWeight','bold');
 ylim([0 1.7]);
 xlim([4400 5000]); 
