@@ -26,7 +26,6 @@ profile = [x zb];
 
 % Offshore wave conditions
 H130 = [1.70 2.25 1.69]; % Significant wave height (m), needed to calculate Hrms0
-%Hrms0=sqrt(H13); % Root mean square wave height (m) CHECK !!!!
 Hrms0=H130/sqrt(2);
 theta0 = [-36 39 36]; % Angle of incidence (degrees)
 T0 = [7.58 6.69 5.54]; % Characteristic period (s)
