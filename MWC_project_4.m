@@ -2,7 +2,7 @@ clear; clc; close all;
 
 %% Chapter 5 - Modelling cross-shore wave transformations
 
-%% 5.1 Model description  
+%% 5.3 Model/data comparison  
 
 % Main script for the computation of the cross-shore wave evolution 
 % for a simplified bar-trough case based on the Battjes and Janssen (1978)
@@ -63,7 +63,8 @@ plot(waves(1).x,waves(1).Hrms);
 hold on;
 scatter(position,data.Hrms_tot(:,1),'o');
 legend('Model','Observations');
-ylabel('Hrms (m)');
+title('Cross-shore evolution of wave height(Hrms) for Egmond during low tide');
+ylabel('Height (m)','FontWeight','bold');
 xlim([4400 5000]); 
 
 % Mid tide
@@ -72,7 +73,8 @@ plot(waves(2).x,waves(2).Hrms);
 hold on;
 scatter(position,data.Hrms_tot(:,2),'o');
 legend('Model','Observations');
-ylabel('Hrms (m)');
+title('Cross-shore evolution of wave height(Hrms) for Egmond during mid tide');
+ylabel('Height (m)','FontWeight','bold');
 xlim([4400 5000]); 
 
 % High tide
@@ -81,8 +83,9 @@ plot(waves(3).x,waves(3).Hrms);
 hold on;
 scatter(position,data.Hrms_tot(:,3),'o');
 legend('Model','Observations');
-ylabel('Hrms (m)');
-xlim([4400 5000]);  
+title('Cross-shore evolution of wave height(Hrms) for Egmond during high tide');
+ylabel('Height (m)','FontWeight','bold');
+xlim([4400 5000]);   
 
 % Bed profile and mean water depth for each sensor at each tide
 subplot(4,1,4); 
@@ -91,13 +94,13 @@ hold on;
 scatter(position,MeanWaterDepth(:,1),'o');
 scatter(position,MeanWaterDepth(:,2),'o');
 scatter(position,MeanWaterDepth(:,3),'o');
-legend('Bedform','Low tide','Mid tide','High tide');
-hold on; 
-ylabel('Bedform (m)');
-xlabel('x (m)');
+plot(profile(:,1),0*ones(size(profile(:,1))),'k');
+legend('Bedform','Low tidal level','Mid tidal level','High tidal level');
+title('Cross-shore evolution of bedform for Egmond');
+ylabel('Height (m)','FontWeight','bold');
+xlabel('Position (m)','FontWeight','bold');
 xlim([4400 5000]); 
-
-
+savefig('Matlab4_v');
 %% Interpolation
 % Estimation of the modelled wave heights at the exact location of the sensors for each tide using the interpolation function
 
@@ -109,6 +112,8 @@ end
 % exercise, but I added it here)
 difference= interpolation-data.Hrms_tot;
 
+display(interpolation);
+display(difference);
 %% Root mean square error
 % Computation of the root mean square error between observed and modelled
 % wave heights (Hrms) at each tide.
@@ -118,3 +123,12 @@ for i=1:3
     erms(i)=root_mean_square_error(interpolation(:,i),data.Hrms_tot(:,i));
 end 
 
+display(erms);
+
+% Room mean square error for the full dataset
+interpolation_dataset = [interpolation(:,1);interpolation(:,2);interpolation(:,3)];
+data.Hrms_tot_dataset = [data.Hrms_tot(:,1);data.Hrms_tot(:,2);data.Hrms_tot(:,3)];
+
+erms_dataset=root_mean_square_error(interpolation_dataset,data.Hrms_tot_dataset);
+
+display(erms_dataset);
