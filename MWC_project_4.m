@@ -65,6 +65,7 @@ scatter(position,data.Hrms_tot(:,1),'o');
 legend('Model','Observations');
 title('Cross-shore evolution of wave height(Hrms) for Egmond during low tide');
 ylabel('Height (m)','FontWeight','bold');
+ylim([0 1.7]);
 xlim([4400 5000]); 
 
 % Mid tide
@@ -75,6 +76,7 @@ scatter(position,data.Hrms_tot(:,2),'o');
 legend('Model','Observations');
 title('Cross-shore evolution of wave height(Hrms) for Egmond during mid tide');
 ylabel('Height (m)','FontWeight','bold');
+ylim([0 1.7]);
 xlim([4400 5000]); 
 
 % High tide
@@ -85,6 +87,7 @@ scatter(position,data.Hrms_tot(:,3),'o');
 legend('Model','Observations');
 title('Cross-shore evolution of wave height(Hrms) for Egmond during high tide');
 ylabel('Height (m)','FontWeight','bold');
+ylim([0 1.7]);
 xlim([4400 5000]);   
 
 % Bed profile and mean water depth for each sensor at each tide
