@@ -42,9 +42,11 @@ waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin);
 
 figure;
 subplot(4,1,1); plot(waves.x,waves.Hrms);
-%title('Zeta =',num2str(Zeta(1)));
+title('cross-shore evolution of variables for given initial conditions');
 
 ylabel('Hrms (m)');
+xlabel('x (m)');
+ylim([0.5 1.4]);
 subplot(4,1,2); plot(waves.x,waves.z,'k');
 hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
 xlabel('x (m)');
@@ -78,8 +80,9 @@ for i=1:2
     %           Visualisation 
     figure;
     subplot(4,1,1); plot(waves.x,waves.Hrms);
-    %title('Zeta =',num2str(Zeta2(i)));
+    title('Cross-shore evolution of variables for Zeta =',num2str(Zeta2(i)));
     ylabel('Hrms (m)');
+    xlabel('x (m)');
     ylim([0.5 1.5]);
     subplot(4,1,2); plot(waves.x,waves.z,'k');
     hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
@@ -119,8 +122,9 @@ for i=1:2
     %           Visualisation 
     figure;
     subplot(4,1,1); plot(waves.x,waves.Hrms);
-    %title('Hrms0 =',num2str(Hrms02(i)));
+    title('Cross-shore evolution of variables for Hrms0 =',num2str(Hrms02(i)));
     ylabel('Hrms (m)');
+    xlabel('x (m)');
     ylim([0.5 2.5]);
     subplot(4,1,2); plot(waves.x,waves.z,'k');
     hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
@@ -162,8 +166,9 @@ for i=1:2
     %           Visualisation 
     figure;
     subplot(4,1,1); plot(waves.x,waves.Hrms);
-    %title('theta0 =',num2str(theta02(i)));
+    title('Cross-shore evolution of variables for theta0 =',num2str(theta02(i)));
     ylabel('Hrms (m)');
+    xlabel('x (m)')
     ylim([0.5 2.5]);
     subplot(4,1,2); plot(waves.x,waves.z,'k');
     hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
