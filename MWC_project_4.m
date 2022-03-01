@@ -1,5 +1,8 @@
-%% Chapter 5 
+clear; clc; close all;
 
+%% Chapter 5 - Modelling cross-shore wave transformations
+
+%% 5.1 Model description  
 
 % Main script for the computation of the cross-shore wave evolution 
 % for a simplified bar-trough case based on the Battjes and Janssen (1978)
@@ -8,9 +11,6 @@
 %------------------------------------
 %           Initialisation
 %------------------------------------
-
-clear all;
-close all;
 
 prof=load('prof1018.txt');
 MeanWaterDepth=load('MeanWaterDepth.txt');
@@ -25,11 +25,12 @@ zb = prof(:,2);
 profile = [x zb];
 
 % Offshore wave conditions
-H13 = [1.70 2.25 1.69]; % Significant wave height (m), needed to calculate Hrms0
-Hrms0=sqrt(H13); % Root mean square wave height (m)
-theta0 = [-36 39 36];     % Angle of incidence (degrees)
-T0 = [7.58 6.69 5.54];        % Characteristic period (s)
-Zeta = [-0.45 0.09 0.91];       % Mean water level (m)
+H130 = [1.70 2.25 1.69]; % Significant wave height (m), needed to calculate Hrms0
+%Hrms0=sqrt(H13); % Root mean square wave height (m) CHECK !!!!
+Hrms0=H130/sqrt(2);
+theta0 = [-36 39 36]; % Angle of incidence (degrees)
+T0 = [7.58 6.69 5.54]; % Characteristic period (s)
+Zeta = [-0.45 0.09 0.91]; % Mean water level (m)
 
 % Model parameter 
 hmin = 0.2;     % Minimal water depth for computation
@@ -43,10 +44,13 @@ for i=1:3
     waves(i) = BJmodel(Hrms0(i),T0(i),Zeta(i),theta0(i),profile,hmin);
 end
 
-
 %loading statistics from chapter 2
 data=load('StatisticsEgmond.mat','Hm_tot','Hrms_tot','H13_tot');
+Hm_tot=data.Hm_tot;
+Hrms_tot=data.Hrms_tot;
+H13_tot=data.H13_tot;
 position=[4478 4765 4790 4814 4835];
+save('StatisticsEgmond_3','position','Hm_tot','Hrms_tot','H13_tot');
 
 %------------------------------------
 %           Visualisation 

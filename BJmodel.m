@@ -21,7 +21,7 @@ function waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin)
 %   Output: structure WAVES which contains the following field with ngridpoints
 %   values in each field (at each cross-shore location in the grid):
 %   'Hrms':  root-mean-square wave height
-%   'E':    wave energy
+%   'E':     wave energy
 %   'eta':   set-up
 %   'ht':    total water depth
 %   'k':     wave number
@@ -37,7 +37,7 @@ function waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin)
 %   'Er':    roller energy
 %   'Dr':    roller dissipation
 %   'st':    standard deviation of near-bed orbital velocity
-%   'Dbr':    dissipation due to wave breaking
+%   'Dbr':   dissipation due to wave breaking
 %   'x':     cross-shore grid
 %   'z':     bed level (relative to mean sea level; - is below MSL)
 %

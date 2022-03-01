@@ -41,33 +41,37 @@ waves = BJmodel(Hrms0,T0,Zeta,theta0,profile,hmin);
 %------------------------------------
 
 figure;
-subplot(4,1,1); plot(waves.x,waves.Hrms);
-title('cross-shore evolution of variables for given initial conditions');
-
-ylabel('Hrms (m)');
-xlabel('x (m)');
+subplot(4,1,1); 
+plot(waves.x,waves.Hrms); 
+title('Cross-shore evolution of Hrms for given initial conditions');
+ylabel('Height (m)','FontWeight','bold');
 ylim([0.5 1.4]);
-subplot(4,1,2); plot(waves.x,waves.z,'k');
-hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
-xlabel('x (m)');
-ylabel('zb (m)');
+xlim([0 395]);
+
+subplot(4,1,2); 
+plot(waves.x,waves.z,'k');
+title('Cross-shore evolution of set-up for given initial conditions');
+hold on; 
+plot(waves.x,Zeta*ones(size(x)),'-.');
+legend('Bed level','Mean water level');
+ylabel('Height (m)','FontWeight','bold');
 
 %Adding the Dbr and Dissipation of the roller plots
 subplot(4,1,3);
 plot(waves.x,waves.Dbr);
-xlabel('x (m)');
-ylabel('Dbr (W/m^2)') ;
-ylim([0 250]);
-xlim([0 420]);
+title('Cross-shore evolution of dissipation wave breaking for given initial conditions');
+ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
+ylim([0 300]);
+xlim([0 395]);
 
 subplot(4,1,4);
-
 plot(waves.x,waves.Dr);
-xlabel('x (m)');
-ylabel('Dr ((W/m^2))') ;
+title('Cross-shore evolution of dissipation rolling for given initial conditions');
+xlabel('Position (m)','FontWeight','bold');
+ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
 ylim([0 300]);
-xlim([0 420]);
-
+xlim([0 395]);
+savefig('Matlab4_i')
 %% varying Zeta
 
 Zeta2 = [-1, 1];
@@ -78,38 +82,44 @@ for i=1:2
     waves = BJmodel(Hrms0,T0,Zeta2(i),theta0,profile,hmin);
     %------------------------------------
     %           Visualisation 
+    %------------------------------------
+    
     figure;
-    subplot(4,1,1); plot(waves.x,waves.Hrms);
-    title('Cross-shore evolution of variables for Zeta =',num2str(Zeta2(i)));
-    ylabel('Hrms (m)');
-    xlabel('x (m)');
+    subplot(4,1,1); 
+    plot(waves.x,waves.Hrms);
+    %title('Cross-shore evolution of variables for Zeta =',num2str(Zeta2(i)));
+    %title('Cross-shore evolution of Hrms for given initial conditions');
+    ylabel('Height (m)','FontWeight','bold');
     ylim([0.5 1.5]);
-    subplot(4,1,2); plot(waves.x,waves.z,'k');
-    hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
-    xlabel('x (m)');
-    ylabel('zb (m)');
+    xlim([0 395]);
+      
+    subplot(4,1,2); 
+    plot(waves.x,waves.z,'k');
+    title('Cross-shore evolution of set-up for given initial conditions');
+    hold on; 
+    plot(waves.x,Zeta*ones(size(x)),'-.');
+    legend('Bed level','Mean water level');
+    ylabel('Height (m)','FontWeight','bold');
     
     %Adding the Dbr and Dissipation of the roller plots
     subplot(4,1,3);
     plot(waves.x,waves.Dbr);
-    xlabel('x (m)');
-    ylabel('Dbr ((W/m^2))') ;
-    xlim([0 420]);
+    title('Cross-shore evolution of dissipation wave breaking for given initial conditions');
+    ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
+    xlim([0 395]);
     ylim([0 250]);
     
-    
     subplot(4,1,4);
-    
     plot(waves.x,waves.Dr);
     xlabel('x (m)');
     ylabel('Dr ((W/m^2))') ;
+    title('Cross-shore evolution of dissipation rolling for given initial conditions');
+    xlabel('Position (m)','FontWeight','bold');
+    ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
     ylim([0 300]);
-    xlim([0 420]);
-    
-
-
+    xlim([0 395]);
 end
-
+savefig('Matlab4_ii');
 %% varying Hrms0
 
 Hrms02 = [0.5, 2];
@@ -121,40 +131,38 @@ for i=1:2
     %------------------------------------
     %           Visualisation 
     figure;
-    subplot(4,1,1); plot(waves.x,waves.Hrms);
-    title('Cross-shore evolution of variables for Hrms0 =',num2str(Hrms02(i)));
-    ylabel('Hrms (m)');
-    xlabel('x (m)');
+    subplot(4,1,1); 
+    plot(waves.x,waves.Hrms);
+    %title('Cross-shore evolution of variables for Hrms0 =',num2str(Hrms02(i)));
+    ylabel('Height (m)','FontWeight','bold');
     ylim([0.5 2.5]);
-    subplot(4,1,2); plot(waves.x,waves.z,'k');
-    hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
-    xlabel('x (m)');
-    ylabel('zb (m)');
+    
+    subplot(4,1,2); 
+    plot(waves.x,waves.z,'k');
+    hold on; 
+    plot(waves.x,Zeta*ones(size(x)),'-.');
+    legend('Bed level','Mean water level');
+    ylabel('Height (m)','FontWeight','bold');
     
     %Adding the Dbr and Dissipation of the roller plots
     subplot(4,1,3);
     plot(waves.x,waves.Dbr);
-    xlabel('x (m)');
-    ylabel('Dbr ((W/m^2))') ;
-    xlim([0 400]);
-    ylim([0 500]);
-    
+    title('Cross-shore evolution of dissipation wave breaking for given initial conditions');
+    ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
+    xlim([0 395]);
+    ylim([0 600]);
     
     subplot(4,1,4);
-    
     plot(waves.x,waves.Dr);
-    xlabel('x (m)');
     ylabel('Dr ((W/m^2))') ;
+    title('Cross-shore evolution of dissipation rolling for given initial conditions');
+    xlabel('Position (m)','FontWeight','bold');
+    ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
     ylim([0 600]);
-    xlim([0 400]);
-    
-
-
+    xlim([0 395]);
 end
-
-
+savefig('Matlab4_iii');
 %% varying theta
-
 
 theta02 = [22.5, 45];
 
@@ -165,33 +173,34 @@ for i=1:2
     %------------------------------------
     %           Visualisation 
     figure;
-    subplot(4,1,1); plot(waves.x,waves.Hrms);
-    title('Cross-shore evolution of variables for theta0 =',num2str(theta02(i)));
-    ylabel('Hrms (m)');
-    xlabel('x (m)')
+    subplot(4,1,1); 
+    plot(waves.x,waves.Hrms);
+    %title('Cross-shore evolution of variables for theta0 =',num2str(theta02(i)));
+    ylabel('Height (m)','FontWeight','bold');
     ylim([0.5 2.5]);
-    subplot(4,1,2); plot(waves.x,waves.z,'k');
-    hold on; plot(waves.x,Zeta*ones(size(x)),'-.');
-    xlabel('x (m)');
-    ylabel('zb (m)');
+    
+    subplot(4,1,2); 
+    plot(waves.x,waves.z,'k');
+    hold on; 
+    plot(waves.x,Zeta*ones(size(x)),'-.');
+    legend('Bed level','Mean water level');
+    ylabel('Height (m)','FontWeight','bold');
   
-
     %Adding the Dbr and Dissipation of the roller plots
     subplot(4,1,3);
     plot(waves.x,waves.Dbr);
-    xlabel('x (m)');
-    ylabel('Dbr ((W/m^2))'); 
-    xlim([0 400]);
-    ylim([0 500]); %set ylim
-    
+    title('Cross-shore evolution of dissipation wave breaking for given initial conditions');
+    ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
+    xlim([0 395]);
+    ylim([0 250]); %set ylim
     
     subplot(4,1,4);
-    
     plot(waves.x,waves.Dr);
-    xlabel('x (m)');
     ylabel('Dr ((W/m^2))') ;
-    ylim([0 600]);%set ylim
-    xlim([0 400]); 
-
-
+    title('Cross-shore evolution of dissipation rolling for given initial conditions');
+    xlabel('Position (m)','FontWeight','bold');
+    ylabel('Power per surface area (W/m^2)','FontWeight','bold') ;
+    xlim([0 395]);
+    ylim([0 250]);%set ylim
 end
+savefig('Matlab4_iv');
